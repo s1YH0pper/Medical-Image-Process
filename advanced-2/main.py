@@ -1,6 +1,15 @@
 import cv2
 import matplotlib.pyplot as plt
 
+
+# 定义函数用于读取并转换图像为灰度图
+def load_and_convert_to_gray(image_path):
+    image = cv2.imread(image_path)
+    if image is None:
+        raise FileNotFoundError(f"Unable to load image at path: {image_path}")
+    return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+
 print("选择要配准的图像:")
 print("1: 大小不同的图像")
 print("2: 明暗不同的图像")
@@ -25,29 +34,45 @@ else:
     print("无效选择，请重新运行程序。")
     exit()
 
-img1 = cv2.cvtColor(cv2.imread(img1_path), cv2.COLOR_BGR2GRAY)
-img2 = cv2.cvtColor(cv2.imread(img2_path), cv2.COLOR_BGR2GRAY)
+# 尝试加载图像
+try:
+    img1 = load_and_convert_to_gray(img1_path)
+    img2 = load_and_convert_to_gray(img2_path)
+except FileNotFoundError as e:
+    print(e)
+    exit()
 
 sift = cv2.SIFT_create()
 
+# 检测关键点和描述符
 keypoints_1, descriptors_1 = sift.detectAndCompute(img1, None)
 keypoints_2, descriptors_2 = sift.detectAndCompute(img2, None)
 
-bf = cv2.BFMatcher(cv2.NORM_L1, crossCheck=True)
+if descriptors_1 is None or descriptors_2 is None:
+    raise ValueError(
+        "No descriptors found in one or both images, unable to proceed with matching."
+    )
 
+# 使用 Brute-Force Matcher 进行匹配
+bf = cv2.BFMatcher(cv2.NORM_L1, crossCheck=True)
 matches = bf.match(descriptors_1, descriptors_2)
 
+# 根据距离排序匹配点，距离越小表示匹配越好
 matches = sorted(matches, key=lambda x: x.distance)
 
+# 限制显示的匹配点数量
 img3 = cv2.drawMatches(
     img1,
     keypoints_1,
     img2,
     keypoints_2,
     matches[:num_matches_to_display],
-    img2,
+    None,
     flags=2,
 )
 
-plt.imshow(img3)
+plt.figure(figsize=(10, 5))
+plt.imshow(img3, cmap="gray")
+plt.title(f"Top {num_matches_to_display} Feature Matches")
+plt.axis("off")
 plt.show()
