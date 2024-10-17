@@ -3,6 +3,11 @@
 # Medical-Image-Process
 
 <img src="https://img.shields.io/badge/python-3.9+-blue.svg" alt="python">
+
+<img src="https://img.shields.io/badge/numpy-1.26.0-blue" alt="numpy">
+
+<img src="https://img.shields.io/badge/OpenCV-4.8.1-blue" alt="OpenCV">
+
 <img src="https://img.shields.io/github/license/s1YH0pper/Medical-Image-Process.svg" alt="license">
 
 一个基于 Python 的基本医学影像图像处理展示
@@ -36,9 +41,9 @@
 
 6. CT 图像肺实质分割 (未完成)
 7. 医学图像数值的测量 (未完成)
-8. 医学图像伪彩处理 (未完成)
+8. 医学图像伪彩处理 (basic-8)
 9. 退化医学图像的复原 (未完成)
-10. 基于 SIFT 算法的医学图像配准 (未完成)
+10. 基于 SIFT 算法的医学图像配准 (advanced-2)
 11. 不同模态医学图像的融合 (未完成)
 12. 医学图像病变部位的标记 (未完成)
 13. CT 图像的窗宽和窗位 (未完成)
@@ -54,17 +59,18 @@
 ## 使用方法
 
 1. 安装环境
+   确保安装了 anaconda 或 miniconda, 在项目目录下的命令行输入
 
-   - 通过 pip 包管理导入环境
-
-   ```bash
-   pip install -r requirements_pip.txt
-   ```
-
-   - 通过 anaconda 或 miniconda
+   1. 通过 anaconda 或 miniconda 创建环境
 
    ```bash
-   conda create -n ENVNAME --file requirements_conda.txt
+   conda create -n ENVNAME --file env.txt
    ```
 
-2. 运行对应目录下的`main.py`文件
+   2. 通过 pip 包管理导入部分包
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. 运行对应目录下的 `main.py` 文件
