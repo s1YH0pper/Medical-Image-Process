@@ -1,0 +1,5 @@
+inquirerpy==0.3.4
+opencv-python==4.8.1.78
+pfzy==0.3.4
+prompt-toolkit==3.0.48
+wcwidth==0.2.13
