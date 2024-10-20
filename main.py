@@ -9,7 +9,7 @@ basic_menu_options = {
     "5. 医学图像 DCT 水印": "basic-5/main.py",
     "6. CT 图像肺实质分割 (未完成)": "basic-6/main.py",
     "7. 医学图像数值的测量 (未完成)": "basic-7/main.py",
-    "8. 医学图像伪彩处理 (未完成)": "basic-8/main.py",
+    "8. 医学图像伪彩处理": "basic-8/main.py",
 }
 
 advanced_menu_options = {
@@ -19,7 +19,7 @@ advanced_menu_options = {
     "4. 医学图像病变部位的标记 (未完成)": "advanced-4/main.py",
     "5. CT 图像的窗宽和窗位 (未完成)": "advanced-5/main.py",
     "6. MRI 图像的频率域滤波": "advanced-6/main.py",
-    "7. MRI 图像的增强处理 (未完成)": "advanced-7/main.py",
+    "7. MRI 图像的增强处理": "advanced-7/main.py",
     "8. 基于分水岭算法的病变区域分割 (未完成)": "advanced-8/main.py",
 }
 menu_dict = {"基础(basic)": basic_menu_options, "高级(advanced)": advanced_menu_options}
