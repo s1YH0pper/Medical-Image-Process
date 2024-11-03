@@ -7,7 +7,7 @@ basic_menu_options = {
     "3. 图像的形态学运算": "basic-3/main.py",
     "4. 图像的平滑和锐化": "basic-4/main.py",
     "5. 医学图像 DCT 水印": "basic-5/main.py",
-    "6. CT 图像肺实质分割 (未完成)": "basic-6/main.py",
+    "6. CT 图像肺实质分割": "basic-6/main.py",
     "7. 医学图像数值的测量 (未完成)": "basic-7/main.py",
     "8. 医学图像伪彩处理": "basic-8/main.py",
 }
