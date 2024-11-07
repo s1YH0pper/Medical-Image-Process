@@ -15,7 +15,7 @@ basic_menu_options = {
 advanced_menu_options = {
     "1. 退化医学图像的复原 (未完成)": "advanced-1/main.py",
     "2. 基于 SIFT 算法的医学图像配准": "advanced-2/main.py",
-    "3. 不同模态医学图像的融合 (未完成)": "advanced-3/main.py",
+    "3. 不同模态医学图像的融合": "advanced-3/main.py",
     "4. 医学图像病变部位的标记": "advanced-4/main.py",
     "5. CT 图像的窗宽和窗位 (未完成)": "advanced-5/main.py",
     "6. MRI 图像的频率域滤波": "advanced-6/main.py",
