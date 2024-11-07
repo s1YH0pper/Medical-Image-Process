@@ -1,5 +1,6 @@
 from InquirerPy import prompt
 import subprocess
+import os
 
 
 # 运行目录下 Python 文件的函数
@@ -14,6 +15,8 @@ def run_python_file(file_path):
 # 子菜单：运行子目录下的 Python 文件
 def submenu(menu_choice: str, submenu_dict: dict):
     while True:
+        # 清空屏幕
+        os.system("cls")
         # 动态生成choices列表，末尾添加"Back"选项
         choices = list(submenu_dict.keys()) + ["Back"]
         questions = [
@@ -36,6 +39,8 @@ def submenu(menu_choice: str, submenu_dict: dict):
 # 主菜单
 def main_menu(menu_dict: dict):
     while True:
+        # 清空屏幕
+        os.system("cls")
         # 动态生成choices列表，末尾添加"Exit"选项
         choices = list(menu_dict.keys()) + ["Exit"]
         questions = [
