@@ -6,3 +6,4 @@ wcwidth==0.2.13
 scikit-image==0.24.0
 scipy==1.13.1
 simpleitk==2.4.0
+pydicom==2.4.4
