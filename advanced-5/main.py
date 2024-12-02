@@ -1,7 +1,7 @@
 import pydicom
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.widgets import Slider
+from matplotlib.widgets import Slider, Button
 
 
 def load_dicom_image(file_path):
@@ -54,6 +54,26 @@ def update(val):
     display_image(windowed_image)
 
 
+def set_predefined_window(val):
+    """设置常用窗宽窗位"""
+    # 根据按钮标签设置对应的窗宽窗位
+    predefined_values = {
+        "Soft Tissue": (40, 400),
+        "Lung": (-600, 1500),
+        "Bone": (500, 1500),
+        "Brain": (40, 80),
+        "Abdomen": (50, 350),
+    }
+
+    window_center, window_width = predefined_values[val]
+    slider_level.set_val(window_center)
+    slider_width.set_val(window_width)
+
+    # 更新图像显示
+    windowed_image = apply_window_level(image_data, window_center, window_width)
+    display_image(windowed_image)
+
+
 # 载入CT图像
 dicom_file_path = "advanced-5/1.dcm"
 image_data = load_dicom_image(dicom_file_path)
@@ -93,5 +113,25 @@ slider_width = Slider(
 # 将滑动条与更新函数关联
 slider_level.on_changed(update)
 slider_width.on_changed(update)
+
+# 创建常用窗宽窗位按钮
+ax_soft_tissue = plt.axes([0.0, 0.25, 0.2, 0.05])
+ax_lung = plt.axes([0.2, 0.25, 0.2, 0.05])
+ax_bone = plt.axes([0.4, 0.25, 0.2, 0.05])
+ax_brain = plt.axes([0.6, 0.25, 0.2, 0.05])
+ax_abdomen = plt.axes([0.8, 0.25, 0.2, 0.05])
+
+button_soft_tissue = Button(ax_soft_tissue, "Soft Tissue")
+button_lung = Button(ax_lung, "Lung")
+button_bone = Button(ax_bone, "Bone")
+button_brain = Button(ax_brain, "Brain")
+button_abdomen = Button(ax_abdomen, "Abdomen")
+
+# 为按钮绑定事件
+button_soft_tissue.on_clicked(lambda event: set_predefined_window("Soft Tissue"))
+button_lung.on_clicked(lambda event: set_predefined_window("Lung"))
+button_bone.on_clicked(lambda event: set_predefined_window("Bone"))
+button_brain.on_clicked(lambda event: set_predefined_window("Brain"))
+button_abdomen.on_clicked(lambda event: set_predefined_window("Abdomen"))
 
 plt.show()
