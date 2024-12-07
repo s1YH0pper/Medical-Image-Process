@@ -104,11 +104,11 @@ axs[1, 2].axis("off")
 axs[1, 0].axis("off")
 
 # 创建滑动条
-ax_lowpass = plt.axes([0.1, 0.1, 0.65, 0.03])
-ax_highpass = plt.axes([0.1, 0.05, 0.65, 0.03])
+ax_lowpass = plt.axes([0.2, 0.1, 0.65, 0.03])
+ax_highpass = plt.axes([0.2, 0.05, 0.65, 0.03])
 
-low_pass_slider = Slider(ax_lowpass, "Low-pass\nRadius", 0, 100, valinit=20)
-high_pass_slider = Slider(ax_highpass, "High-pass\nRadius", 0, 100, valinit=20)
+low_pass_slider = Slider(ax_lowpass, "Low-pass Radius", 0, 100, valinit=20)
+high_pass_slider = Slider(ax_highpass, "High-pass Radius", 0, 100, valinit=20)
 
 # 连接滑动条和更新函数
 low_pass_slider.on_changed(update)
