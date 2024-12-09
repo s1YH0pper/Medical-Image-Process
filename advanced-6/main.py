@@ -27,11 +27,14 @@ def create_circular_mask(shape, radius, is_high_pass=False):
     return mask.astype(np.uint8)
 
 
-def apply_filter(img, low_pass_radius, high_pass_radius):
-    """应用高通和低通滤波"""
+def image2Kspace(image):
+    """图像的K-空间转换"""
     # 傅里叶变换
-    f_shift = np.fft.fftshift(np.fft.fft2(img))
+    return np.fft.fftshift(np.fft.fft2(img))
 
+
+def apply_filter(img, f_shift, low_pass_radius, high_pass_radius):
+    """应用高通和低通滤波"""
     # 低通滤波
     lpf_mask = create_circular_mask(img.shape, low_pass_radius, is_high_pass=False)
     f_shift_lpf = f_shift * lpf_mask
@@ -51,7 +54,7 @@ def update(val):
     high_pass_radius = high_pass_slider.val
 
     img_lpf, img_hpf, lpf_mask, hpf_mask = apply_filter(
-        img, low_pass_radius, high_pass_radius
+        img, f_shift, low_pass_radius, high_pass_radius
     )
 
     # 更新显示的低通和高通滤波图像
@@ -79,8 +82,14 @@ axs[0, 0].imshow(img, cmap="gray")
 axs[0, 0].set_title("Original Image")
 axs[0, 0].axis("off")
 
+# 显示K空间
+f_shift = image2Kspace(img)
+f_shift_img = axs[1, 0].imshow(np.log(np.abs(f_shift) + 1), cmap="gray")
+axs[1, 0].set_title("K-space Image")
+axs[1, 0].axis("off")
+
 # 显示初始滤波图像
-img_lpf, img_hpf, lpf_mask, hpf_mask = apply_filter(img, 20, 20)
+img_lpf, img_hpf, lpf_mask, hpf_mask = apply_filter(img, f_shift, 20, 20)
 
 # 在子图中显示滤波后的图像
 lpf_img = axs[0, 1].imshow(img_lpf, cmap="gray")
@@ -99,9 +108,6 @@ axs[1, 1].axis("off")
 hpf_mask_img = axs[1, 2].imshow(hpf_mask, cmap="gray")
 axs[1, 2].set_title("High-pass Mask")
 axs[1, 2].axis("off")
-
-# 隐藏左下角的空白子图
-axs[1, 0].axis("off")
 
 # 创建滑动条
 ax_lowpass = plt.axes([0.2, 0.1, 0.65, 0.03])
